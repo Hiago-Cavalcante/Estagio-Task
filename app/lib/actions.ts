@@ -4,20 +4,24 @@ import { z } from "zod";
 import postgres from "postgres";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { sign } from "crypto";
 import { AuthError } from "next-auth";
-import { de } from "zod/v4/locales";
 import { signIn } from "@/auth"
 
 
+
+
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
+
 
 const formSchema = z.object({
   id: z.string(),
   customerId: z.string({
     invalid_type_error: "Please select a customer",
   }),
-  amount: z.coerce.number().gt(0, { message: "Amount must be greater than $0" }),
+  amount: z.coerce
+    .number()
+    .gt(0, { message: "Amount must be greater than $0" })
+    .max(92233720368547.75, { message: "Amount is too large. Maximum allowed is $92,233,720,368,547.75" }),
   status: z.enum(['pending', 'paid'], {
     invalid_type_error: "Please select a invoice status",
   }),
