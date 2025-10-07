@@ -49,8 +49,7 @@ export default async function Page() {
           <LatestInvoices />
         </Suspense>
       </div>
-      <div className="my-6 h-px w-full bg-gray-200 dark:bg-gray-700" />
-      <h3 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
+      <h3 className={`${lusitana.className} mb-4 mt-6 text-xl md:text-2xl`}>
         Products Overview
       </h3>
       <div className="flex justify-center">
