@@ -1,5 +1,6 @@
 import postgres from 'postgres';
-import { PrismaClient } from '@prisma/client';
+// Use a singleton Prisma client to avoid multiple instances during hot reloads/build
+import { prisma } from './prisma';
 import {
   CustomerField,
   CustomersTableType,
@@ -11,7 +12,6 @@ import {
 import { formatCurrency } from './utils';
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
-const prisma = new PrismaClient();
 
 // ==================== REVENUE ====================
 export async function fetchRevenue() {
