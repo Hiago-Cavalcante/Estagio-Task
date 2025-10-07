@@ -3,16 +3,22 @@ import {
   ClockIcon,
   UserGroupIcon,
   InboxIcon,
-} from '@heroicons/react/24/outline';
-import { lusitana } from '@/app/ui/fonts';
-import { fetchCardData } from '@/app/lib/data';
+  CubeIcon,
+  CurrencyDollarIcon,
+  TagIcon,
+} from '@heroicons/react/24/outline'
+import { lusitana } from '@/app/ui/fonts'
+import { fetchCardData, fetchProductsCardData } from '@/app/lib/data'
 
 const iconMap = {
   collected: BanknotesIcon,
   customers: UserGroupIcon,
   pending: ClockIcon,
   invoices: InboxIcon,
-};
+  products: CubeIcon,
+  stock: CurrencyDollarIcon,
+  categories: TagIcon,
+}
 
 export default async function CardWrapper() {
   const {
@@ -20,12 +26,10 @@ export default async function CardWrapper() {
     numberOfInvoices,
     totalPaidInvoices,
     totalPendingInvoices,
-  } = await fetchCardData();
+  } = await fetchCardData()
 
   return (
     <>
-      {/* NOTE: Uncomment this code in Chapter 9 */}
-
       <Card title="Collected" value={totalPaidInvoices} type="collected" />
       <Card title="Pending" value={totalPendingInvoices} type="pending" />
       <Card title="Total Invoices" value={numberOfInvoices} type="invoices" />
@@ -35,7 +39,20 @@ export default async function CardWrapper() {
         type="customers"
       />
     </>
-  );
+  )
+}
+
+export async function ProductCardWrapper() {
+  const { totalProducts, totalInventoryValue, numberOfCategories } =
+    await fetchProductsCardData()
+
+  return (
+    <>
+      <Card title="Total Products" value={totalProducts} type="products" />
+      <Card title="Stock Value" value={totalInventoryValue} type="stock" />
+      <Card title="Categories" value={numberOfCategories} type="categories" />
+    </>
+  )
 }
 
 export function Card({
@@ -43,11 +60,18 @@ export function Card({
   value,
   type,
 }: {
-  title: string;
-  value: number | string;
-  type: 'invoices' | 'customers' | 'pending' | 'collected';
+  title: string
+  value: number | string
+  type:
+    | 'invoices'
+    | 'customers'
+    | 'pending'
+    | 'collected'
+    | 'products'
+    | 'stock'
+    | 'categories'
 }) {
-  const Icon = iconMap[type];
+  const Icon = iconMap[type]
 
   return (
     <div className="rounded-xl bg-gray-50 p-2 shadow-sm">
@@ -62,5 +86,5 @@ export function Card({
         {value}
       </p>
     </div>
-  );
+  )
 }

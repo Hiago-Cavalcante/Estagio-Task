@@ -1,0 +1,67 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  name     String @db.VarChar(255)
+  email    String @unique
+  password String
+
+  productsCreated Product[] @relation("ProductCreatedBy")
+  productsUpdated Product[] @relation("ProductUpdatedBy")
+
+  @@map("users")
+}
+
+model Customer {
+  id        String @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  name      String @db.VarChar(255)
+  email     String @db.VarChar(255)
+  image_url String @db.VarChar(255)
+
+  @@map("customers")
+}
+
+model Invoice {
+  id          String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  customer_id String   @db.Uuid
+  amount      BigInt
+  status      String   @db.VarChar(255)
+  date        DateTime @db.Date
+
+  @@map("invoices")
+}
+
+model Revenue {
+  month   String @unique @db.VarChar(4)
+  revenue Int
+
+  @@map("revenue")
+}
+
+model Product {
+  id          String   @id @default(cuid())
+  name        String   @db.VarChar(100)
+  description String   @db.VarChar(500)
+  price       Decimal  @db.Decimal(10, 2)
+  category    String   @db.VarChar(50)
+  stock       Int
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  createdById String?  @db.Uuid
+  updatedById String?  @db.Uuid
+
+  createdByUser User? @relation("ProductCreatedBy", fields: [createdById], references: [id])
+  updatedByUser User? @relation("ProductUpdatedBy", fields: [updatedById], references: [id])
+
+  @@index([createdById])
+  @@index([updatedById])
+  @@map("Product")
+}

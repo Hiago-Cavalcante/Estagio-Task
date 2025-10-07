@@ -1,10 +1,10 @@
 import Pagination from '@/app/ui/invoices/pagination'
-import Search from '@/app/ui/search'
+import Search from '@/app/ui/defaultComponents/search'
 import Table from '@/app/ui/invoices/table'
 import { CreateInvoice } from '@/app/ui/invoices/buttons'
 import { lusitana } from '@/app/ui/fonts'
 import { Suspense } from 'react'
-import { InvoicesTableSkeleton } from '@/app/ui/skeletons'
+import { InvoicesTableSkeleton } from '@/app/ui/defaultComponents/skeletons'
 import { fetchInvoicesPages } from '@/app/lib/data'
 import { Metadata } from 'next'
 

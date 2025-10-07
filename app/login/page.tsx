@@ -1,5 +1,5 @@
-import AcmeLogo from '@/app/ui/acme-logo'
-import LoginForm from '@/app/ui/login-form'
+import AcmeLogo from '@/app/ui/defaultComponents/acme-logo'
+import LoginForm from '@/app/ui/defaultComponents/login-form'
 import { Suspense } from 'react'
 
 export default function LoginPage() {

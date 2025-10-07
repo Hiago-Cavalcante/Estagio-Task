@@ -1,6 +1,7 @@
 import '@/app/ui/global.css'
 import { inter } from './ui/fonts'
 import { Metadata } from 'next'
+import { Toaster } from '@/app/ui/defaultComponents/toaster'
 
 export const metadata: Metadata = {
   title: 'Acme Inc.',
@@ -15,7 +16,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} antialiased`}>{children}</body>
+      <body className={`${inter.className} antialiased`}>
+        {children}
+        <Toaster />
+      </body>
     </html>
   )
 }

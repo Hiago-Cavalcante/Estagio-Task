@@ -16,6 +16,20 @@ export const authConfig = {
             }
             return true;
         },
+        jwt({ token, user }) {
+            // Add user id to the token when user logs in
+            if (user) {
+                token.id = user.id;
+            }
+            return token;
+        },
+        session({ session, token }) {
+            // Add user id to the session from token
+            if (token.id) {
+                session.user.id = token.id as string;
+            }
+            return session;
+        },
     },
     providers: [],
 } satisfies NextAuthConfig;
