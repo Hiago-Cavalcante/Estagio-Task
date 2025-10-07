@@ -9,7 +9,8 @@ import {
 } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { Button } from '@/app/ui/defaultComponents/buttonDefaultProject'
-import { updateInvoice, State } from '@/app/lib/actions'
+import { updateInvoice } from '@/app/lib/actions'
+import { State } from '@/app/lib/definitions'
 import { useActionState } from 'react'
 
 export default function EditInvoiceForm({

@@ -9,9 +9,9 @@ import {
   UserCircleIcon,
 } from '@heroicons/react/24/outline'
 import { Button } from '@/app/ui/defaultComponents/buttonDefaultProject'
-import { createInvoice, State } from '@/app/lib/actions'
+import { createInvoice } from '@/app/lib/actions'
+import { State } from '@/app/lib/definitions'
 import { useActionState } from 'react'
-import { create } from 'domain'
 
 export default function Form({ customers }: { customers: CustomerField[] }) {
   const initialState: State = { message: null, errors: {} }

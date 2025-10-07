@@ -3,7 +3,6 @@ import { Suspense } from 'react'
 import ProductsEvolutionChart from '@/app/ui/dashboard/products-evolution-chart'
 import { fetchProductsCreatedByMonth } from '@/app/lib/data'
 import {
-  ProductCardsSkeleton,
   ProductsChartSkeleton,
 } from '@/app/ui/defaultComponents/skeletons'
 

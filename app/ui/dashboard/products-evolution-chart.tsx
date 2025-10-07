@@ -96,7 +96,7 @@ export default function ProductsEvolutionChart({
           size: 13,
         },
         callbacks: {
-          label: function (context: any) {
+          label: function (context: { parsed: { y: number } }) {
             return `Products: ${context.parsed.y}`
           },
         },
