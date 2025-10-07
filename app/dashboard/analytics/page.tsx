@@ -2,9 +2,7 @@ import { lusitana } from '@/app/ui/fonts'
 import { Suspense } from 'react'
 import ProductsEvolutionChart from '@/app/ui/dashboard/products-evolution-chart'
 import { fetchProductsCreatedByMonth } from '@/app/lib/data'
-import {
-  ProductsChartSkeleton,
-} from '@/app/ui/defaultComponents/skeletons'
+import { ProductsChartSkeleton } from '@/app/ui/defaultComponents/skeletons'
 
 export default async function AnalyticsPage() {
   return (

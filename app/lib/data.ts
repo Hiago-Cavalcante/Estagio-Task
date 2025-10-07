@@ -659,7 +659,12 @@ export async function fetchTopAndBottomPricedProducts() {
 }
 
 // ==================== ANALYTICS ====================
-export async function fetchProductsCreatedByMonth() {
+export interface ProductsCreatedByMonthItem {
+  month: string;
+  count: number;
+}
+
+export async function fetchProductsCreatedByMonth(): Promise<ProductsCreatedByMonthItem[]> {
   try {
     await new Promise((resolve) => setTimeout(resolve, 2000));
 
@@ -684,14 +689,14 @@ export async function fetchProductsCreatedByMonth() {
     }, {});
 
     // Converter para array e formatar
-    const sortedData = Object.entries(monthlyData)
+    const sortedData: ProductsCreatedByMonthItem[] = Object.entries(monthlyData)
       .sort(([a], [b]) => a.localeCompare(b))
       .map(([monthYear, count]) => {
         const [year, month] = monthYear.split('-');
         const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
         return {
           month: `${monthNames[parseInt(month) - 1]} ${year}`,
-          count,
+          count: Number(count),
         };
       });
 
